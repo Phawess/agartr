@@ -1,54 +1,66 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// script.js
 
-let player = { x: canvas.width / 2, y: canvas.height / 2, size: 20, speed: 2 };
-let foods = [];
+// DOM Elementleri
+const startScreen = document.getElementById('start-screen');
+const gameContainer = document.getElementById('game-container');
+const gameCanvas = document.getElementById('game-canvas');
+const ctx = gameCanvas.getContext('2d');
 
-// Generate random food items
-for (let i = 0; i < 50; i++) {
-    foods.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: 5
-    });
-}
+// Ekran boyutlarını ayarla
+gameCanvas.width = window.innerWidth;
+gameCanvas.height = window.innerHeight;
 
-// Update player position
-document.addEventListener('mousemove', (e) => {
-    const dx = e.clientX - player.x;
-    const dy = e.clientY - player.y;
-    const angle = Math.atan2(dy, dx);
-    player.x += Math.cos(angle) * player.speed;
-    player.y += Math.sin(angle) * player.speed;
+// Oyuncu nesnesi
+const player = {
+  x: gameCanvas.width / 2,
+  y: gameCanvas.height / 2,
+  size: 20,
+  color: 'red',
+  speed: 5,
+};
+
+// Oyuncu hareketi için tuş durumları
+const keys = {
+  w: false,
+  a: false,
+  s: false,
+  d: false,
+};
+
+// Oyun başlatma
+document.getElementById('start-button').addEventListener('click', () => {
+  startScreen.style.display = 'none';
+  gameContainer.style.display = 'block';
+  gameLoop();
 });
 
-// Game loop
-function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+// Klavye kontrolü
+document.addEventListener('keydown', (event) => {
+  if (keys.hasOwnProperty(event.key)) keys[event.key] = true;
+});
 
-    // Draw player
-    ctx.beginPath();
-    ctx.arc(player.x, player.y, player.size, 0, Math.PI * 2);
-    ctx.fillStyle = 'blue';
-    ctx.fill();
+document.addEventListener('keyup', (event) => {
+  if (keys.hasOwnProperty(event.key)) keys[event.key] = false;
+});
 
-    // Draw and check collision with food
-    foods = foods.filter(food => {
-        const dist = Math.hypot(player.x - food.x, player.y - food.y);
-        if (dist < player.size + food.size) {
-            player.size += 0.5; // Grow player
-            return false; // Remove food
-        }
-        ctx.beginPath();
-        ctx.arc(food.x, food.y, food.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'green';
-        ctx.fill();
-        return true;
-    });
-
-    requestAnimationFrame(gameLoop);
+// Oyuncuyu çiz
+function drawPlayer() {
+  ctx.fillStyle = player.color;
+  ctx.fillRect(player.x, player.y, player.size, player.size);
 }
 
-gameLoop();
+// Oyuncu hareket ettir
+function movePlayer() {
+  if (keys.w && player.y > 0) player.y -= player.speed;
+  if (keys.s && player.y < gameCanvas.height - player.size) player.y += player.speed;
+  if (keys.a && player.x > 0) player.x -= player.speed;
+  if (keys.d && player.x < gameCanvas.width - player.size) player.x += player.speed;
+}
+
+// Ana oyun döngüsü
+function gameLoop() {
+  ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height); // Ekranı temizle
+  movePlayer(); // Oyuncuyu hareket ettir
+  drawPlayer(); // Oyuncuyu çiz
+  requestAnimationFrame(gameLoop); // Döngüyü devam ettir
+}
