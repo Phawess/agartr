@@ -1,0 +1,43 @@
+/* style.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #333;
+  color: white;
+}
+
+#start-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+#start-button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#start-button:hover {
+  background-color: #0056b3;
+}
+
+#game-container {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background-color: #87ceeb; /* Gökyüzü rengi */
+  overflow: hidden;
+}
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
