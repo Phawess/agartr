@@ -1,43 +1,135 @@
-/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #333;
-  color: white;
+    height: 100vh;
+    background-color: #36393f;
+    color: #fff;
 }
 
-#start-screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
+.screen {
+    height: 100vh;
+    width: 100%;
 }
 
-#start-button {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.hidden {
+    display: none;
 }
 
-#start-button:hover {
-  background-color: #0056b3;
+/* Login Screen */
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2f3136;
+    padding: 2rem;
+    border-radius: 5px;
+    text-align: center;
 }
 
-#game-container {
-  display: none;
-  width: 100vw;
-  height: 100vh;
-  background-color: #87ceeb; /* Gökyüzü rengi */
-  overflow: hidden;
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 3px;
+    background-color: #40444b;
+    color: #fff;
 }
 
-#game-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
+/* Main Screen */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background-color: #2f3136;
+    float: left;
+    padding: 1rem;
+}
+
+.channels h3, .users-list h3 {
+    color: #8e9297;
+    margin-bottom: 1rem;
+}
+
+.channel {
+    padding: 8px;
+    margin: 2px 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.channel:hover {
+    background-color: #40444b;
+}
+
+.main-content {
+    margin-left: 240px;
+    height: 100vh;
+}
+
+.chat-container {
+    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+}
+
+#messages {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 5px;
+}
+
+.message-input {
+    padding: 1rem;
+    background-color: #40444b;
+    display: flex;
+}
+
+.message-input input {
+    flex-grow: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #40444b;
+    color: #fff;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #7289da;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #677bc4;
+}
+
+/* Stream Container */
+.stream-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2f3136;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#stream-video {
+    width: 320px;
+    height: 240px;
+    background-color: #000;
 }
