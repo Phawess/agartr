@@ -1,23 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hayatta Kalma Oyunu</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Clone</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Giriş Ekranı -->
-  <div id="start-screen">
-    <h1>Hayatta Kalma Oyunu</h1>
-    <button id="start-button">Oyuna Başla</button>
-  </div>
+    <div id="login-screen" class="screen">
+        <div class="login-container">
+            <h2>Hoş Geldiniz</h2>
+            <input type="text" id="username-input" placeholder="Kullanıcı Adı">
+            <button id="join-btn">Katıl</button>
+        </div>
+    </div>
 
-  <!-- Oyun Alanı -->
-  <div id="game-container">
-    <canvas id="game-canvas"></canvas>
-  </div>
+    <div id="main-screen" class="screen hidden">
+        <div class="sidebar">
+            <div class="channels">
+                <h3>Ses Kanalları</h3>
+                <div class="voice-channels">
+                    <div class="channel" data-channel="genel">🔊 Genel</div>
+                    <div class="channel" data-channel="oyun">🎮 Oyun</div>
+                    <div class="channel" data-channel="muzik">🎵 Müzik</div>
+                </div>
+            </div>
+            <div class="users-list">
+                <h3>Çevrimiçi Kullanıcılar</h3>
+                <div id="online-users"></div>
+            </div>
+        </div>
 
-  <script src="script.js"></script>
+        <div class="main-content">
+            <div class="chat-container">
+                <div id="messages"></div>
+                <div class="message-input">
+                    <input type="text" id="message-input" placeholder="Mesaj yaz...">
+                    <button id="send-btn">Gönder</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stream-container hidden">
+            <video id="stream-video" autoplay></video>
+            <button id="start-stream">Yayın Başlat</button>
+            <button id="stop-stream" class="hidden">Yayını Durdur</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
